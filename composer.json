@@ -1,0 +1,26 @@
+{
+  "name": "cupcoffee/mapper",
+  "description": "A data to object mapper",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Mapper\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Spotify\\": "tests/Spotify/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Leroy",
+      "email": "leroy@lorey.nl"
+    }
+  ],
+  "require-dev": {
+    "guzzlehttp/guzzle": "^6.2"
+  }
+}
