@@ -14,8 +14,8 @@ class JsonMapperTest extends TestCase
 
 	public function getJsonData()
 	{
-		if ($jsonData) {
-			return $jsonData;
+		if ($this->jsonData) {
+			return $this->jsonData;
 		}
 
 		$guzzle = new Client();
@@ -26,8 +26,8 @@ class JsonMapperTest extends TestCase
 			]
 		]);
 
-		$jsonData = $response->getBody()->getContents();
-		return $jsonData;
+		$this->jsonData = $response->getBody()->getContents();
+		return $this->jsonData;
 	}
 
 	public function testJsonMapper()
