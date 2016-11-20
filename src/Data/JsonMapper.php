@@ -10,13 +10,21 @@ use Traversable;
 class JsonMapper implements IMapper
 {
 	/**
-	 * @param mixed $data
+	 * @param string $data
 	 * @param MapObject $class
 	 * @return mixed
 	 */
 	public function map($data, $class)
 	{
+		if (!is_string($data)) {
+			throw new \InvalidArgumentException('Expected json to be string');
+		}
+
 		$decodedData = json_decode($data);
+
+		if (!$decodedData) {
+			throw new \InvalidArgumentException(json_last_error_msg());
+		}
 
 		$object = $class->getInstance();
 

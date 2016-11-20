@@ -26,7 +26,7 @@ class JsonMapperTest extends TestCase
 			]
 		]);
 
-		$jsonData = json_decode($response->getBody()->getContents());
+		$jsonData = $response->getBody()->getContents();
 		return $jsonData;
 	}
 
