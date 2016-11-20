@@ -2,14 +2,14 @@
 
 namespace Spotify\Album;
 
-use App\Spotify\Object\Album;
-use \App\Spotify\Object\PagingObject as BasePagingObject;
+use Spotify\Album;
+use Spotify\PagingObject as BasePagingObject;
 
 class PagingObject extends BasePagingObject
 {
 
 	/**
-	 * @var \App\Spotify\Object\Album[]
+	 * @var Spotify\Album[]
 	 */
 	public $items;
 }
