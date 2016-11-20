@@ -1,17 +1,18 @@
 {
-  "name": "cupcoffee/mapper",
+  "name": "cupcoffee/reify",
   "description": "A data to object mapper",
   "minimum-stability": "stable",
   "license": "proprietary",
   "type": "library",
   "autoload": {
     "psr-4": {
-      "Mapper\\": "src/"
+      "Reify\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Spotify\\": "tests/Spotify/"
+      "Reify\\Tests\\": "tests/",
+      "Spotify\\": "tests/Data/Spotify"
     }
   },
   "authors": [
@@ -21,6 +22,7 @@
     }
   ],
   "require-dev": {
-    "guzzlehttp/guzzle": "^6.2"
+    "guzzlehttp/guzzle": "^6.2",
+    "phpunit/phpunit": "^5.6"
   }
 }

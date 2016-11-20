@@ -1,6 +1,6 @@
 <?php
 
-namespace Mapper;
+namespace Reify;
 
 interface IMapper
 {

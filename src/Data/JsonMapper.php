@@ -1,10 +1,10 @@
 <?php
 
-namespace Mapper\Data;
+namespace Reify\Data;
 
-use Mapper\IMapper;
-use Mapper\Map\MapObject;
-use Mapper\Map\MapProperty;
+use Reify\IMapper;
+use Reify\Map\MapObject;
+use Reify\Map\MapProperty;
 use Traversable;
 
 class JsonMapper implements IMapper

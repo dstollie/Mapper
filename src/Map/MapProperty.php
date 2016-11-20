@@ -1,6 +1,6 @@
 <?php
 
-namespace Mapper\Map;
+namespace Reify\Map;
 
 
 class MapProperty

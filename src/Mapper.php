@@ -1,9 +1,9 @@
 <?php
 
-namespace Mapper;
+namespace Reify;
 
 use Exception;
-use Mapper\Map\MapObject;
+use Reify\Map\MapObject;
 
 class Mapper
 {
