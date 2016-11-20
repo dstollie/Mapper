@@ -2,11 +2,14 @@
 
 namespace Reify;
 
+use Reify\Map\MapObject;
+
 interface IMapper
 {
 	/**
 	 * @param mixed $data
-	 * @param $object
+	 * @param MapObject $class
+	 * @return mixed;
 	 */
-	public function map($data, $object);
+	public function map($data, $class);
 }
