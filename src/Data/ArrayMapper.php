@@ -18,13 +18,28 @@ class ArrayMapper implements IMapper
 	{
 		$object = $class->getInstance();
 
-		foreach ($data as $propertyName => $value) {
-			$this->mapProperty($class->getProperty($propertyName), $value, $object);
+		if (is_object($data) || $this->isAssoc($data)) {
+			foreach ($data as $propertyName => $value) {
+				$this->mapProperty($class->getProperty($propertyName), $value, $object);
+			}
+
+			return $object;
+		} else {
+			$objects = [];
+
+			foreach($data as $item) {
+				$object = $class->getInstance();
+
+				foreach($item as $propertyName => $value) {
+					$this->mapProperty($class->getProperty($propertyName), $value, $object);
+				}
+
+				$objects[] = $object;
+			}
+
+			return $objects;
 		}
-
-		return $object;
 	}
-
 
 	/**
 	 * @param MapProperty $property
@@ -63,5 +78,11 @@ class ArrayMapper implements IMapper
 				}
 			}
 		}
+	}
+
+	private function isAssoc($array)
+	{
+		if ([] === $array) return false;
+		return array_keys($array) !== range(0, count($array) - 1);
 	}
 }

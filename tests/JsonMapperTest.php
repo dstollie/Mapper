@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Reify\Data\JsonMapper;
 use Reify\Mapper;
 use Spotify\PagedResponse;
+use Spotify\Track;
 
 class JsonMapperTest extends TestCase
 {
@@ -30,13 +31,25 @@ class JsonMapperTest extends TestCase
 		return $this->jsonData;
 	}
 
-	public function testJsonMapper()
+	public function testJsonMapping()
 	{
 		$json = $this->getJsonData();
 
 		$mapper = new Mapper();
 		$pagedResponse = $mapper->map(new JsonMapper(), $json)->to(PagedResponse::class);
 
-		var_dump($pagedResponse);
+		$this->assertTrue($pagedResponse instanceof PagedResponse);
+	}
+
+	public function testJsonArrayRoot()
+	{
+		$decodedJson = json_decode($this->getJsonData());
+		$json = json_encode($decodedJson->tracks->items);
+
+		$mapper = new Mapper();
+		$tracks = $mapper->map(new JsonMapper(), $json)->to(Track::class);
+
+		$this->assertCount(count($decodedJson->tracks->items), $tracks);
+		$this->assertTrue(is_array($tracks));
 	}
 }
