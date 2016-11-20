@@ -57,7 +57,7 @@ class JsonMapper implements IMapper
 							$object->$propertyName = [];
 						}
 
-						$object->$propertyName[] = $propertyObject;
+						$object->{$propertyName}[] = $propertyObject;
 					}  else {
 						$object->$propertyName = $propertyObject;
 					}
