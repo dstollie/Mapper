@@ -7,6 +7,12 @@ use Reify\IMapper;
 use Reify\Map\MapObject;
 use Reify\Map\MapProperty;
 
+/**
+ * Can map an array to a concrete class
+ *
+ * Class ArrayMapper
+ * @package Reify\Data
+ */
 class ArrayMapper implements IMapper
 {
 	/**
@@ -14,22 +20,36 @@ class ArrayMapper implements IMapper
 	 * @param MapObject $class
 	 * @return mixed
 	 */
-	public function map($data, $class)
+	public function map($data, MapObject $class)
 	{
+		// Get the instance of the class we want to map the data to
 		$object = $class->getInstance();
 
-		if (is_object($data) || $this->isAssoc($data)) {
+		foreach ($data as $propertyName => $value) {
+			// Map every property in the first dimension
+			$this->mapProperty($class->getProperty($propertyName), $value, $object);
+		}
+
+		return $object;
+
+		// Whether the item we want to map is a single item
+		$isSingleItem = is_object($data) || $this->isAssoc($data);
+
+		if ($isSingleItem) {
+			// Loop trough every property in the data
 			foreach ($data as $propertyName => $value) {
+				// Map every property in the first dimension
 				$this->mapProperty($class->getProperty($propertyName), $value, $object);
 			}
 
 			return $object;
+		// Otherwise it is a list with multiple items
 		} else {
+			// Stores the mapped objects
 			$objects = [];
-
+			// Loop through every item
 			foreach($data as $item) {
-				$object = $class->getInstance();
-
+				// Loop trough every property in the item
 				foreach($item as $propertyName => $value) {
 					$this->mapProperty($class->getProperty($propertyName), $value, $object);
 				}
@@ -42,6 +62,28 @@ class ArrayMapper implements IMapper
 	}
 
 	/**
+	 * @param $data
+	 * @return mixed
+	 */
+	public function validate($data)
+	{
+		return is_array($data) || is_object($data);
+	}
+
+	/**
+	 * @param $data
+	 * @param MapObject $class
+	 * @return array
+	 */
+	public function mapCollection($data, MapObject $class)
+	{
+		// Get the instance of the class we want to map the data to
+		$object = $class->getInstance();
+	}
+
+	/**
+	 *
+	 *
 	 * @param MapProperty $property
 	 * @param MapObject $object
 	 */

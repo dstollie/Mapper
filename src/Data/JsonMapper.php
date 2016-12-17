@@ -7,11 +7,9 @@ use Reify\Map\MapObject;
 class JsonMapper extends ArrayMapper
 {
 	/**
-	 * @param array $data
-	 * @param MapObject $object
-	 * @return mixed
+	 * @inheritdoc
 	 */
-	public function map($data, $object)
+	public function map($data, MapObject $class)
 	{
 		if (!is_string($data)) {
 			throw new \InvalidArgumentException('Expected json to be string');
@@ -23,6 +21,16 @@ class JsonMapper extends ArrayMapper
 			throw new \InvalidArgumentException(json_last_error_msg());
 		}
 
-		return parent::map($decodedData, $object);
+		return parent::map($decodedData, $class);
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function validate($data)
+	{
+		json_decode($data);
+		return (json_last_error() == JSON_ERROR_NONE);
+	}
+
 }

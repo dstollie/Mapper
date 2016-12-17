@@ -11,5 +11,18 @@ interface IMapper
 	 * @param MapObject $class
 	 * @return mixed;
 	 */
-	public function map($data, $class);
+	public function map($data, MapObject $class);
+
+	/**
+	 * @param $data
+	 * @param MapObject $class
+	 * @return array
+	 */
+	public function mapCollection($data, MapObject $class);
+
+	/**
+	 * @param $data
+	 * @return mixed
+	 */
+	public function validate($data);
 }

@@ -44,6 +44,11 @@ class MapObject
 		}
 	}
 
+	/**
+	 * @param $class
+	 * @param null $key
+	 * @return MapObject
+	 */
 	public static function map($class, $key = null)
 	{
 		$class = trim($class, '/\\');

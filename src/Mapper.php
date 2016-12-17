@@ -5,6 +5,12 @@ namespace Reify;
 use Exception;
 use Reify\Map\MapObject;
 
+/**
+ * The main class which is the orchestrator of the whole mapping process
+ *
+ * Class Mapper
+ * @package Reify
+ */
 class Mapper
 {
 	/**
@@ -31,6 +37,10 @@ class Mapper
 			throw new Exception("Undefined mapper interface");
 		}
 
+		if(!$this->mapper->validate($this->data))
+		{
+			throw new \InvalidArgumentException();
+		}
 		return $this->mapper->map($this->data, MapObject::map($class));
 	}
 
